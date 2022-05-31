@@ -1,7 +1,7 @@
 import { iComponent } from '../interfaces/icomponent.js';
 import { Component } from './component.js';
 
-export class Header extends Component implements iComponent {
+export class Sample extends Component implements iComponent {
     template: string;
     constructor(public selector: string) {
         super();
@@ -10,9 +10,7 @@ export class Header extends Component implements iComponent {
     }
     createTemplate() {
         return `
-            <header class="main-header">
-                <h1 class="main-title">My Series [[headerComponent]]</h1>
-            </header> 
+     
         `;
     }
 }
