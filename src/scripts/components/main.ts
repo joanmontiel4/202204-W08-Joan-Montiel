@@ -1,5 +1,7 @@
 import { iComponent } from '../interfaces/icomponent.js';
 import { Component } from './component.js';
+import { SeriesPending } from './series-pending.js';
+import { SeriesWatched } from './series-watched.js';
 
 export class Main extends Component implements iComponent {
     template: string;
@@ -7,6 +9,7 @@ export class Main extends Component implements iComponent {
         super();
         this.template = this.createTemplate();
         this.outRender(this.selector);
+        this.createContent();
     }
     createTemplate() {
         return `
@@ -18,5 +21,9 @@ export class Main extends Component implements iComponent {
                 </section>    
             </main>
         `;
+    }
+    createContent() {
+        new SeriesPending('slot.series-pending');
+        new SeriesWatched('slot.series-watched');
     }
 }
