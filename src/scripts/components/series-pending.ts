@@ -34,7 +34,7 @@ export class SeriesPending extends Component implements iComponent {
                     />
                     <h4 class="serie__title">${item.name}</h4>
                     <p class="serie__info">${item.creator} (${item.year})</p>
-                    <ul class="score">
+                    <ul class="score" data-id="${item.id}">
                         ${htmlStars}
                     </ul>
                     <i class="fas fa-times-circle icon--delete"></i>
@@ -71,5 +71,10 @@ export class SeriesPending extends Component implements iComponent {
             item.watched === false && count++;
         });
         return count.toString();
+    }
+    manageScore() {
+        document
+            .querySelectorAll('.icon--score')
+            .forEach(addEventListener('click', this.handlerEvent()));
     }
 }
