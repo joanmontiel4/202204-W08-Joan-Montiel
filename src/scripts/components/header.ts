@@ -11,7 +11,7 @@ export class Header extends Component implements iComponent {
     createTemplate() {
         return `
             <header class="main-header">
-                <h1 class="main-title">My Series [[headerComponent]]</h1>
+                <h1 class="main-title">My Series</h1>
             </header> 
         `;
     }

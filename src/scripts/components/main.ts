@@ -15,7 +15,7 @@ export class Main extends Component implements iComponent {
         return `
             <main class="main">
                 <section class="series">
-                        <h2 class="section-title">Series list [[mainComponent]]</h2>
+                        <h2 class="section-title">Series list</h2>
                         <slot class="series-pending"></slot>
                         <slot class="series-watched"></slot>
                 </section>    

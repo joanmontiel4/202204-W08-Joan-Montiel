@@ -18,7 +18,7 @@ export class SeriesPending extends Component implements iComponent {
         for (let i = 0; i < 5; i++) {
             htmlStars += `
                 <li class="score__star">
-                    <i class="icon--score fas fa-star" title="${i}/5"></i>
+                    <i class="icon--score far fa-star" title="${i}/5"></i>
                 </li>
             `;
         }
@@ -44,13 +44,32 @@ export class SeriesPending extends Component implements iComponent {
         });
         return `
         <section class="series-pending">
-                <h3 class="subsection-title">Pending series [[SeriesPending Component]]</h3>
-                <p class="info">You have 4 series pending to watch</p>
-                <!--<p class="info">Congrats! You've watched all your series</p>-->
+                <h3 class="subsection-title">Pending series</h3>
+                ${this.watchedSeriesParagraph()}
                 <ul class="series-list">
                     ${htmlItems}
                 </ul>
         </section>
         `;
+    }
+    watchedSeriesParagraph() {
+        const numberOfPendingSeries = this.numberOfPendingSeries();
+        if (numberOfPendingSeries !== '0') {
+            return `
+                <p class="info">You have ${numberOfPendingSeries} series pending to watch</p>
+            
+            `;
+        } else {
+            return `
+                <p class="info">Congrats! You've watched all your series</p>
+            `;
+        }
+    }
+    numberOfPendingSeries() {
+        let count: number = 0;
+        this.series.forEach((item) => {
+            item.watched === false && count++;
+        });
+        return count.toString();
     }
 }

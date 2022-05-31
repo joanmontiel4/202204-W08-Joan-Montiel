@@ -36,7 +36,7 @@ export const seriesList = [
         year: 2001,
         poster: 'https://www.cine.com/media/series/2711.jpg',
         watched: true,
-        score: 5,
+        score: 4,
         emmies: 53,
     },
     {
