@@ -26,7 +26,7 @@ export class SeriesWatched extends Component implements iComponent {
                     />
                     <h4 class="serie__title">${item.name}</h4>
                     <p class="serie__info">${item.creator} (${item.year})</p>
-                    <ul class="score">
+                    <ul class="score" data-id="${item.id}">
                         ${this.generateStars(item.score)}
                     </ul>
                     <i class="fas fa-times-circle icon--delete"></i>
