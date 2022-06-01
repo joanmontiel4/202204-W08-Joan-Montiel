@@ -1,5 +1,6 @@
 import { Component } from './component.js';
 import { seriesList } from '../series-list.js';
+import { Stars } from './stars.js';
 export class SeriesPending extends Component {
     selector;
     template;
@@ -10,17 +11,10 @@ export class SeriesPending extends Component {
         this.series = seriesList;
         this.template = this.createTemplate();
         this.outRender(this.selector);
+        this.generateStars();
     }
     createTemplate() {
         let htmlItems = '';
-        let htmlStars = '';
-        for (let i = 0; i < 5; i++) {
-            htmlStars += `
-                <li class="score__star">
-                    <i class="icon--score far fa-star" title="${i}/5"></i>
-                </li>
-            `;
-        }
         this.series.forEach((item) => {
             if (item.watched === false) {
                 htmlItems += `
@@ -32,8 +26,7 @@ export class SeriesPending extends Component {
                     />
                     <h4 class="serie__title">${item.name}</h4>
                     <p class="serie__info">${item.creator} (${item.year})</p>
-                    <ul class="score" data-id="${item.id}">
-                        ${htmlStars}
+                    <ul class="score serie-${item.id}" data-id="${item.id}">
                     </ul>
                     <i class="fas fa-times-circle icon--delete"></i>
                 </li>
@@ -71,10 +64,12 @@ export class SeriesPending extends Component {
         });
         return count.toString();
     }
-    manageScore() {
-        document
-            .querySelectorAll('.icon--score')
-            .forEach(addEventListener('click', this.handlerEvent()));
+    generateStars() {
+        this.series.forEach((serie) => {
+            if (serie.watched === false) {
+                new Stars(`.score.serie-${serie.id}`, serie);
+            }
+        });
     }
 }
 //# sourceMappingURL=series-pending.js.map

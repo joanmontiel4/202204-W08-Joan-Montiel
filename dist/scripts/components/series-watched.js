@@ -1,5 +1,6 @@
 import { Component } from './component.js';
 import { seriesList } from '../series-list.js';
+import { Stars } from './stars.js';
 export class SeriesWatched extends Component {
     selector;
     template;
@@ -10,6 +11,7 @@ export class SeriesWatched extends Component {
         this.series = seriesList;
         this.template = this.createTemplate();
         this.outRender(this.selector);
+        this.generateStars();
     }
     createTemplate() {
         let htmlItems = '';
@@ -24,8 +26,7 @@ export class SeriesWatched extends Component {
                     />
                     <h4 class="serie__title">${item.name}</h4>
                     <p class="serie__info">${item.creator} (${item.year})</p>
-                    <ul class="score" data-id="${item.id}">
-                        ${this.generateStars(item.score)}
+                    <ul class="score watched serie-${item.id}" data-id="${item.id}">
                     </ul>
                     <i class="fas fa-times-circle icon--delete"></i>
                 </li>
@@ -41,18 +42,6 @@ export class SeriesWatched extends Component {
                 </ul>
         </section>
         `;
-    }
-    generateStars(score) {
-        let htmlStars = '';
-        for (let i = 0; i < 5; i++) {
-            htmlStars += `
-                    <li class="score__star">
-                        <i class="icon--score ${score <= 0 ? 'far' : 'fas'} fa-star" title="${i}/5"></i>
-                    </li>
-                `;
-            score--;
-        }
-        return htmlStars;
     }
     numberOfWatchedSeries() {
         let count = 0;
@@ -74,6 +63,13 @@ export class SeriesWatched extends Component {
                 <p class="info">You have not watched any serie</p>
             `;
         }
+    }
+    generateStars() {
+        this.series.forEach((serie) => {
+            if (serie.watched === true) {
+                new Stars(`.score.watched.serie-${serie.id}`, serie);
+            }
+        });
     }
 }
 //# sourceMappingURL=series-watched.js.map
