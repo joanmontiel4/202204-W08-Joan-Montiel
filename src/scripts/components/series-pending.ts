@@ -71,9 +71,4 @@ export class SeriesPending extends Component implements iComponent {
             }
         });
     }
-    // manageScore() {
-    //     document
-    //         .querySelectorAll('.icon--score')
-    //         .forEach(addEventListener('click', this.handlerEvent()));
-    // }
 }

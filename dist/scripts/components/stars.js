@@ -1,6 +1,5 @@
 import { Component } from './component.js';
-import { SeriesPending } from './series-pending.js';
-import { SeriesWatched } from './series-watched.js';
+import { Main } from './main.js';
 export class Stars extends Component {
     selector;
     serie;
@@ -41,18 +40,22 @@ export class Stars extends Component {
         const stars = document.querySelectorAll(`.icon--score.serie-${this.serie.id}`);
         if (stars.length !== 0) {
             stars.forEach((star) => star.addEventListener('click', () => {
-                this.addScore(this.serie, star.title[0]);
-                new SeriesPending('slot.series-pending');
-                new SeriesWatched('slot.series-watched');
+                this.handlerStarEvent(this.serie, star.title[0]);
             }));
         }
+        return;
     }
-    addScore(serie, score) {
+    handlerStarEvent(serie, score) {
         serie.score = Number(score) + 1;
         serie.watched = true;
-        console.log('Name: ', serie.name);
-        console.log('Score: ', serie.score);
-        console.log('Watched: ', serie.watched);
+        // console.log('Name: ', serie.name);
+        // console.log('Score: ', serie.score);
+        // console.log('Watched: ', serie.watched);
+        this.updateRender();
+        return;
+    }
+    updateRender() {
+        new Main('.main');
     }
 }
 //# sourceMappingURL=stars.js.map
