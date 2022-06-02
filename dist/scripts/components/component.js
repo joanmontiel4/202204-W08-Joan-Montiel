@@ -10,6 +10,7 @@ export class Component {
         if (selector && document.querySelector(selector)) {
             document.querySelector(selector).outerHTML =
                 this.template;
+            console.log(this.template);
         }
     }
     addRender(selector) {

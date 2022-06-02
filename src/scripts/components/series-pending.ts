@@ -3,6 +3,7 @@ import { Component } from './component.js';
 import { seriesList } from '../series-list.js';
 import { iSerie } from '../interfaces/iseries.js';
 import { Stars } from './stars.js';
+import { DeleteButton } from './delete-button.js';
 
 export class SeriesPending extends Component implements iComponent {
     template: string;
@@ -13,13 +14,15 @@ export class SeriesPending extends Component implements iComponent {
         this.template = this.createTemplate();
         this.outRender(this.selector);
         this.generateStars();
+        this.createDeleteButton();
     }
     createTemplate() {
         let htmlItems = '';
         this.series.forEach((item) => {
             if (item.watched === false) {
+                console.log(item);
                 htmlItems += `
-                    <li class="serie">
+                <li class="serie">
                     <img
                         class="serie__poster"
                         src="${item.poster}"
@@ -29,7 +32,7 @@ export class SeriesPending extends Component implements iComponent {
                     <p class="serie__info">${item.creator} (${item.year})</p>
                     <ul class="score serie-${item.id}" data-id="${item.id}">
                     </ul>
-                    <i class="fas fa-times-circle icon--delete"></i>
+                    <slot class="delete-button-serie-${item.id}"></slot>
                 </li>
                 `;
             }
@@ -70,5 +73,26 @@ export class SeriesPending extends Component implements iComponent {
                 new Stars(`.score.serie-${serie.id}`, serie);
             }
         });
+    }
+    createDeleteButton() {
+        this.series.forEach((serie) => {
+            if (serie.watched === false) {
+                new DeleteButton(
+                    `.delete-button-serie-${serie.id}`,
+                    serie,
+                    this.deleteSerie.bind(this)
+                );
+            }
+        });
+    }
+    deleteSerie(id: number) {
+        this.series = this.series.filter((item) => {
+            return item.id !== id;
+        });
+        console.log(this.series);
+        this.template = this.createTemplate();
+        this.outRender('.series-pending');
+        this.generateStars();
+        this.createDeleteButton();
     }
 }

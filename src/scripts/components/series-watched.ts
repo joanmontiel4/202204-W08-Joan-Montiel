@@ -3,6 +3,7 @@ import { Component } from './component.js';
 import { seriesList } from '../series-list.js';
 import { iSerie } from '../interfaces/iseries.js';
 import { Stars } from './stars.js';
+import { DeleteButton } from './delete-button.js';
 
 export class SeriesWatched extends Component implements iComponent {
     template: string;
@@ -13,6 +14,7 @@ export class SeriesWatched extends Component implements iComponent {
         this.template = this.createTemplate();
         this.outRender(this.selector);
         this.generateStars();
+        this.createDeleteButton();
     }
     createTemplate() {
         let htmlItems = '';
@@ -30,7 +32,7 @@ export class SeriesWatched extends Component implements iComponent {
                     <p class="serie__info">${item.creator} (${item.year})</p>
                     <ul class="score watched serie-${item.id}" data-id="${item.id}">
                     </ul>
-                    <i class="fas fa-times-circle icon--delete"></i>
+                    <i class="fas fa-times-circle icon--delete serie-${item.id}"></i>
                 </li>
                 `;
             }
@@ -73,5 +75,26 @@ export class SeriesWatched extends Component implements iComponent {
                 new Stars(`.score.watched.serie-${serie.id}`, serie);
             }
         });
+    }
+    createDeleteButton() {
+        this.series.forEach((serie) => {
+            if (serie.watched === true) {
+                new DeleteButton(
+                    `.delete-button-serie-${serie.id}`,
+                    serie,
+                    this.deleteSerie.bind(this)
+                );
+            }
+        });
+    }
+    deleteSerie(id: number) {
+        this.series = this.series.filter((item) => {
+            return item.id !== id;
+        });
+        console.log(this.series);
+        this.template = this.createTemplate();
+        this.outRender('.series-watched');
+        this.generateStars();
+        this.createDeleteButton();
     }
 }
