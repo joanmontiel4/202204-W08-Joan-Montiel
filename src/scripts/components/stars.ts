@@ -1,7 +1,6 @@
 import { iComponent } from '../interfaces/icomponent.js';
 import { Component } from './component.js';
 import { iSerie } from '../interfaces/iseries.js';
-import { Main } from './main.js';
 
 export class Stars extends Component implements iComponent {
     template: string;
@@ -32,9 +31,9 @@ export class Stars extends Component implements iComponent {
             for (let i = 0; i < 5; i++) {
                 htmlStars += `
                         <li class="score__star">
-                            <i class="icon--score ${
-                                score <= 0 ? 'far' : 'fas'
-                            } fa-star" title="${i + 1}/5"></i>
+                            <i class="icon--score serie-${this.serie.id} ${
+                    score <= 0 ? 'far' : 'fas'
+                } fa-star" title="${i + 1}/5"></i>
                         </li>
                     `;
                 score--;
