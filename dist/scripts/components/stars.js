@@ -1,13 +1,14 @@
 import { Component } from './component.js';
-import { Main } from './main.js';
 export class Stars extends Component {
     selector;
     serie;
+    renderSeries;
     template;
-    constructor(selector, serie) {
+    constructor(selector, serie, renderSeries) {
         super();
         this.selector = selector;
         this.serie = serie;
+        this.renderSeries = renderSeries;
         this.template = this.createTemplate();
         this.render(this.selector);
         this.addListener();
@@ -48,14 +49,7 @@ export class Stars extends Component {
     handlerStarEvent(serie, score) {
         serie.score = Number(score);
         serie.watched = true;
-        // console.log('Name: ', serie.name);
-        // console.log('Score: ', serie.score);
-        // console.log('Watched: ', serie.watched);
-        this.updateRender();
-        return;
-    }
-    updateRender() {
-        new Main('.main');
+        this.renderSeries();
     }
 }
 //# sourceMappingURL=stars.js.map

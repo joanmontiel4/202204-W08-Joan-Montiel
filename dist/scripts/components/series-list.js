@@ -93,7 +93,7 @@ export class SeriesList extends Component {
     }
     createSerie() {
         this.series.forEach((serie) => {
-            new Serie(`.serie-card-${serie.id}`, serie);
+            new Serie(`.serie-card-${serie.id}`, serie, this.renderSeries.bind(this));
         });
     }
     createDeleteButton() {
@@ -101,15 +101,17 @@ export class SeriesList extends Component {
             new DeleteButton(`.delete-button-serie-${serie.id}`, serie, this.deleteSerie.bind(this));
         });
     }
-    deleteSerie(id) {
-        this.series = this.series.filter((item) => {
-            return item.id !== id;
-        });
-        console.log(this.series);
+    renderSeries() {
         this.template = this.createTemplate();
         this.outRender('.series');
         this.createSerie();
         this.createDeleteButton();
+    }
+    deleteSerie(id) {
+        this.series = this.series.filter((item) => {
+            return item.id !== id;
+        });
+        this.renderSeries();
     }
 }
 //# sourceMappingURL=series-list.js.map

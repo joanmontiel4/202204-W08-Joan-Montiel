@@ -5,7 +5,11 @@ import { Main } from './main.js';
 
 export class Stars extends Component implements iComponent {
     template: string;
-    constructor(public selector: string, public serie: iSerie) {
+    constructor(
+        public selector: string,
+        public serie: iSerie,
+        public renderSeries: Function
+    ) {
         super();
         this.template = this.createTemplate();
         this.render(this.selector);
@@ -55,13 +59,6 @@ export class Stars extends Component implements iComponent {
     handlerStarEvent(serie: iSerie, score: string) {
         serie.score = Number(score);
         serie.watched = true;
-        // console.log('Name: ', serie.name);
-        // console.log('Score: ', serie.score);
-        // console.log('Watched: ', serie.watched);
-        this.updateRender();
-        return;
-    }
-    updateRender() {
-        new Main('.main');
+        this.renderSeries();
     }
 }

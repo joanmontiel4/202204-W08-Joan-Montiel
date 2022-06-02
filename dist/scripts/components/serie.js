@@ -3,11 +3,13 @@ import { Stars } from './stars.js';
 export class Serie extends Component {
     selector;
     serie;
+    renderSeries;
     template;
-    constructor(selector, serie) {
+    constructor(selector, serie, renderSeries) {
         super();
         this.selector = selector;
         this.serie = serie;
+        this.renderSeries = renderSeries;
         this.template = this.createTemplate();
         this.render(this.selector);
         this.generateStar();
@@ -29,7 +31,7 @@ export class Serie extends Component {
         return htmlSerieCard;
     }
     generateStar() {
-        new Stars(`.score.serie-${this.serie.id}`, this.serie);
+        new Stars(`.score.serie-${this.serie.id}`, this.serie, this.renderSeries.bind(this));
     }
 }
 //# sourceMappingURL=serie.js.map
