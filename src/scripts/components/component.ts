@@ -10,6 +10,7 @@ export abstract class Component {
         if (selector && document.querySelector(selector)) {
             (<HTMLElement>document.querySelector(selector)).outerHTML =
                 this.template;
+            console.log(this.template);
         }
     }
     addRender(selector: string) {

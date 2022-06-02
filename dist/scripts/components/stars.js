@@ -18,7 +18,7 @@ export class Stars extends Component {
             for (let i = 0; i < 5; i++) {
                 htmlStars += `
                     <li class="score__star">
-                        <i class="icon--score serie-${this.serie.id} far fa-star" title="${i}/5"></i>
+                        <i class="icon--score serie-${this.serie.id} far fa-star" title="${i + 1}/5"></i>
                     </li>
                 `;
             }
@@ -28,7 +28,7 @@ export class Stars extends Component {
             for (let i = 0; i < 5; i++) {
                 htmlStars += `
                         <li class="score__star">
-                            <i class="icon--score ${score <= 0 ? 'far' : 'fas'} fa-star" title="${i}/5"></i>
+                            <i class="icon--score ${score <= 0 ? 'far' : 'fas'} fa-star" title="${i + 1}/5"></i>
                         </li>
                     `;
                 score--;
@@ -46,7 +46,7 @@ export class Stars extends Component {
         return;
     }
     handlerStarEvent(serie, score) {
-        serie.score = Number(score) + 1;
+        serie.score = Number(score);
         serie.watched = true;
         // console.log('Name: ', serie.name);
         // console.log('Score: ', serie.score);
