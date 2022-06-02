@@ -1,7 +1,6 @@
 import { iComponent } from '../interfaces/icomponent.js';
 import { Component } from './component.js';
 import { iSerie } from '../interfaces/iseries.js';
-import { Main } from './main.js';
 
 export class Stars extends Component implements iComponent {
     template: string;
