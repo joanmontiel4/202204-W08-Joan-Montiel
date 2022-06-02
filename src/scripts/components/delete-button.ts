@@ -23,10 +23,8 @@ export class DeleteButton extends Component implements iComponent {
         const button = document.querySelector(
             `.icon--delete.serie-${this.serie.id}`
         );
-        console.dir(button);
 
         (<HTMLElement>button).addEventListener('click', () => {
-            console.log('click delete');
             this.handlerDeleteButton(this.serie.id);
         });
     }

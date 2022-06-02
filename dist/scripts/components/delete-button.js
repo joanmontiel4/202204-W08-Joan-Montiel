@@ -20,9 +20,7 @@ export class DeleteButton extends Component {
     }
     addListener() {
         const button = document.querySelector(`.icon--delete.serie-${this.serie.id}`);
-        console.dir(button);
         button.addEventListener('click', () => {
-            console.log('click delete');
             this.handlerDeleteButton(this.serie.id);
         });
     }

@@ -1,6 +1,5 @@
 import { Component } from './component.js';
-import { SeriesPending } from './series-pending.js';
-import { SeriesWatched } from './series-watched.js';
+import { SeriesList } from './series-list.js';
 export class Main extends Component {
     selector;
     template;
@@ -15,16 +14,12 @@ export class Main extends Component {
         return `
             <main class="main">
                 <section class="series">
-                        <h2 class="section-title">Series list</h2>
-                        <slot class="series-pending"></slot>
-                        <slot class="series-watched"></slot>
                 </section>    
             </main>
         `;
     }
     createContent() {
-        new SeriesPending('slot.series-pending');
-        new SeriesWatched('slot.series-watched');
+        new SeriesList('.series');
     }
 }
 //# sourceMappingURL=main.js.map
