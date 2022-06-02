@@ -92,7 +92,11 @@ export class SeriesList extends Component implements iComponent {
     }
     createSerie() {
         this.series.forEach((serie) => {
-            new Serie(`.serie-card-${serie.id}`, serie);
+            new Serie(
+                `.serie-card-${serie.id}`,
+                serie,
+                this.renderSeries.bind(this)
+            );
         });
     }
 
@@ -106,14 +110,17 @@ export class SeriesList extends Component implements iComponent {
         });
     }
 
-    deleteSerie(id: number) {
-        this.series = this.series.filter((item) => {
-            return item.id !== id;
-        });
-        console.log(this.series);
+    renderSeries() {
         this.template = this.createTemplate();
         this.outRender('.series');
         this.createSerie();
         this.createDeleteButton();
+    }
+
+    deleteSerie(id: number) {
+        this.series = this.series.filter((item) => {
+            return item.id !== id;
+        });
+        this.renderSeries();
     }
 }

@@ -5,7 +5,11 @@ import { Stars } from './stars.js';
 
 export class Serie extends Component implements iComponent {
     template: string;
-    constructor(public selector: string, public serie: iSerie) {
+    constructor(
+        public selector: string,
+        public serie: iSerie,
+        public renderSeries: Function
+    ) {
         super();
         this.template = this.createTemplate();
         this.render(this.selector);
@@ -28,6 +32,10 @@ export class Serie extends Component implements iComponent {
         return htmlSerieCard;
     }
     generateStar() {
-        new Stars(`.score.serie-${this.serie.id}`, this.serie);
+        new Stars(
+            `.score.serie-${this.serie.id}`,
+            this.serie,
+            this.renderSeries.bind(this)
+        );
     }
 }
