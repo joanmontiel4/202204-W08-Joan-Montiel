@@ -48,7 +48,10 @@ export class Stars extends Component implements iComponent {
         if (stars.length !== 0) {
             stars.forEach((star) =>
                 star.addEventListener('click', () => {
-                    this.handlerStarEvent(this.serie, star.title[0]);
+                    this.handlerStarEvent(
+                        this.serie,
+                        (star as HTMLElement).title[0]
+                    );
                 })
             );
         }
